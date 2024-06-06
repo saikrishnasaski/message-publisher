@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: message-publisher
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+app:
+  topic_name: users-topic
+
+server:
+  port: 8089
