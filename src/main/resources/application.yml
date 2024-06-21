@@ -2,14 +2,30 @@ spring:
   application:
     name: message-publisher
 
-  kafka:
-    producer:
-      bootstrap-servers: localhost:9092
-      key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#  kafka:
+#    producer:
+#      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#      retries: 0
 
 app:
   topic_name: users-topic
 
 server:
   port: 8089
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+#management.endpoint.health.show.details=always
+
+logging:
+  level:
+    org:
+      apache:
+        kafka:
+          clients:
+            producer: INFO
