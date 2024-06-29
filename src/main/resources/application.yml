@@ -1,6 +1,10 @@
 spring:
   application:
     name: message-publisher
+  lifecycle:
+    timeout-per-shutdown-phase: "30s"
+  zipkin:
+    base-url: http://localhost:9411/
 
 #  kafka:
 #    producer:
@@ -14,15 +18,22 @@ app:
 
 server:
   port: 8089
+  shutdown: "graceful"
 
 management:
   endpoints:
     web:
       exposure:
         include: '*'
+  tracing:
+    sampling:
+      probability: 1.0
 #management.endpoint.health.show.details=always
 
 logging:
+  pattern:
+    correlation: "[${spring.application.name:},%X{traceId:-},%X{spanId:-}] "
+    include-application-name: false
   level:
     org:
       apache:
